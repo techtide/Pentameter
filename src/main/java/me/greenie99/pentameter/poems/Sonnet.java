@@ -1,4 +1,4 @@
-package me.greenie99.pentameter;
+package me.greenie99.pentameter.poems;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,21 +7,27 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Greenie
  * @github techtide
  */
 
-public class Sonnet {
+public final class Sonnet {
     
     private final File file;
     private final int wordCount;
     private final SonnetStyle style;
     private final StringBuilder fullText;
-    private final String[] textByLine = new String[14];
+    private final List<String> textByLine;
     
     public Sonnet(File sonnetText, SonnetStyle sonnetStyle) throws FileNotFoundException, IOException {
+        this.textByLine = getTextByLine(sonnetText);
         this.file = sonnetText;
         this.fullText = setText(sonnetText);
         this.style = sonnetStyle;
@@ -54,10 +60,16 @@ public class Sonnet {
         return superficialBuilder;
     }
     
-    private String[] setTextByLine(File textFile) throws IOException {
-        String[] textByLineCache = new String[14];
-    
-        return null;
+    private List<String> setTextByLine(File textFile) throws IOException {
+        List<String> x = new ArrayList<>();
+        
+        try {
+            BufferedReader br = Files.newBufferedReader(Paths.get(textFile.getName()));
+            x = br.lines().collect(Collectors.toList());
+        } catch (IOException e) {
+        }
+        
+        return x;
     }
     
         
@@ -82,8 +94,8 @@ public class Sonnet {
         return fullText;
     }
 
-    public String[] getTextByLine() {
-        return textByLine;
+    public List<String> getTextByLine(File sonnetText) {
+        return this.textByLine;
     }
     
 }

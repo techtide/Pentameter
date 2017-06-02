@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import me.greenie99.pentameter.poems.*;
 
 /**
  * @author Greenie
@@ -30,7 +31,10 @@ public class Handler {
         File selectedFile = fileChooser.getSelectedFile();
         try {
             Sonnet sonnetPoem = new Sonnet(selectedFile, Sonnet.SonnetStyle.ITALIAN);
-            System.out.println(sonnetPoem.getFullText());
+            /*sonnetPoem.getTextByLine(selectedFile).forEach((s) -> {
+                System.out.println(s);
+            });*/
+            System.out.println(sonnetPoem.getTextByLine(selectedFile));
         } catch (IOException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
         }

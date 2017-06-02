@@ -1,4 +1,4 @@
-package me.greenie99.pentameter.poems;
+package me.greenie99.pentameter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,21 +12,18 @@ import java.io.InputStreamReader;
  * @author Greenie
  * @github techtide
  */
+
 public class Sonnet {
-    
-    public static enum SonnetStyle {
-        ITALIAN,
-        ENGLISH
-    }
     
     private final File file;
     private final int wordCount;
     private final SonnetStyle style;
-    private final StringBuilder text;
+    private final StringBuilder fullText;
+    private final String[] textByLine = new String[14];
     
     public Sonnet(File sonnetText, SonnetStyle sonnetStyle) throws FileNotFoundException, IOException {
         this.file = sonnetText;
-        this.text = getText(sonnetText);
+        this.fullText = setText(sonnetText);
         this.style = sonnetStyle;
         this.wordCount = calculateWordCount(sonnetText);
     }
@@ -44,7 +41,7 @@ public class Sonnet {
         return currentWordCount;
     }
     
-    private StringBuilder getText(File textFile) throws IOException {
+    private StringBuilder setText(File textFile) throws IOException {
         InputStream stream = new FileInputStream(file.getPath());
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         String line;
@@ -55,6 +52,38 @@ public class Sonnet {
         }
         
         return superficialBuilder;
+    }
+    
+    private String[] setTextByLine(File textFile) throws IOException {
+        String[] textByLineCache = new String[14];
+    
+        return null;
+    }
+    
+        
+    public static enum SonnetStyle {
+        ITALIAN,
+        ENGLISH
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public int getWordCount() {
+        return wordCount;
+    }
+
+    public SonnetStyle getStyle() {
+        return style;
+    }
+
+    public StringBuilder getFullText() {
+        return fullText;
+    }
+
+    public String[] getTextByLine() {
+        return textByLine;
     }
     
 }
